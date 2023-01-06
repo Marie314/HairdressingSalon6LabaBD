@@ -1,0 +1,34 @@
+﻿@model FeedbackUpdated
+
+<div id="main">
+    <h2>Feedbacks (update)</h2>
+
+    <div>
+        <a class="menu-item-btn" href="/Clients/Get">Clients</a>
+        <a class="menu-item-btn" href="/Workers/Get">Workers</a>
+        <a class="menu-item-btn" href="/Feedbacks/Get">Feedbacks</a>
+        <a class="menu-item-btn" href="/Orders/Get">Orders</a>
+        <a class="menu-item-btn" href="/ServiceKinds/Get">Service Kinds</a>
+        <a class="menu-item-btn" href="/Services/Get">Services</a>
+    </div>
+
+    <form class="changing-form" method="post" asp-action="Update">
+        <div class="field-container">
+            <label asp-for="Text"></label>
+            <div>
+                <textarea style="height: 130px; width: 350px;" class="input-props" asp-for="Text"></textarea>
+                <span class="error-mes-span" style="color: red; font-size: 90%;" asp-validation-for="Text"></span>
+            </div>
+        </div>
+
+        <div class="field-container">
+            <label asp-for="Mark"></label>
+            <div>
+                <input class="input-props" asp-for="Mark" type="number"/>
+                <span class="error-mes-span" style="color: red; font-size: 90%;" asp-validation-for="Mark"></span>
+            </div>
+        </div>
+
+        <button class="action-btn" type="submit">Submit</button>
+    </form>
+</div>

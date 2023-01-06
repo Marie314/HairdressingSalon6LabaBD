@@ -1,0 +1,42 @@
+﻿@model ServiceKindCreated
+
+<div id="main">
+    <h2>Service Kinds (create)</h2>
+
+    <div>
+        <a class="menu-item-btn" href="/Clients/Get">Clients</a>
+        <a class="menu-item-btn" href="/Workers/Get">Workers</a>
+        <a class="menu-item-btn" href="/Feedbacks/Get">Feedbacks</a>
+        <a class="menu-item-btn" href="/Orders/Get">Orders</a>
+        <a class="menu-item-btn" href="/ServiceKinds/Get">Service Kinds</a>
+        <a class="menu-item-btn" href="/Services/Get">Services</a>
+    </div>
+
+    <form class="changing-form" method="post" asp-action="Create">
+        <div class="field-container">
+            <label asp-for="Name"></label>
+            <div>
+                <input class="input-props" asp-for="Name" />
+                <span class="error-mes-span" style="color: red; font-size: 90%;" asp-validation-for="Name"></span>
+            </div>
+        </div>
+
+        <div class="field-container">
+            <label asp-for="Description"></label>
+            <div>
+                <input class="input-props" asp-for="Description" />
+                <span class="error-mes-span" style="color: red; font-size: 90%;" asp-validation-for="Description"></span>
+            </div>
+        </div>
+
+        <div class="field-container">
+            <label asp-for="ImageUrl"></label>
+            <div>
+                <input class="input-props" asp-for="ImageUrl" />
+                <span class="error-mes-span" style="color: red; font-size: 90%;" asp-validation-for="ImageUrl"></span>
+            </div>
+        </div>
+
+        <button class="action-btn" type="submit">Submit</button>
+    </form>
+</div>

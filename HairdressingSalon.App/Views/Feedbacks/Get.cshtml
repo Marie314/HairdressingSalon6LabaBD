@@ -1,0 +1,62 @@
+﻿@model List<Feedback>
+
+@{
+    ViewData["Title"] = "Feedbacks";
+}
+
+<div id="main">
+
+    <h2>Feedbacks</h2>
+
+    <div>
+        <a class="menu-item-btn" href="/Clients/Get">Clients</a>
+        <a class="menu-item-btn" href="/Workers/Get">Workers</a>
+        <a class="menu-item-btn" href="/Feedbacks/Get">Feedbacks</a>
+        <a class="menu-item-btn" href="/Orders/Get">Orders</a>
+        <a class="menu-item-btn" href="/ServiceKinds/Get">Service Kinds</a>
+        <a class="menu-item-btn" href="/Services/Get">Services</a>
+    </div>
+
+     <form class="changing-form" asp-action="GetByCount" method="get">
+        <button class="show-btn" type="submit">Show</button>
+
+        <input class="input-props" type="number" name="entities_count" style="width: 100px;"/>
+
+        <label>entities</label>
+
+        <a class="show-btn" href="/Feedbacks/GetAll">(Show all)</a>
+</form>
+
+    <a class="create-btn" href="/Feedbacks/Create">Create</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="background: #FAA8F3;color: white;">Id</th>
+                <th style="background: #FAA8F3;color: white;">Client</th>
+                <th style="background: #FAA8F3;color: white;">Worker</th>
+                <th style="background: #FAA8F3;color: white;">Mark</th>
+                <th style="background: #FAA8F3;color: white;">Text</th>
+                <th style="background: #FAA8F3;color: white;">Date & Time</th>
+                <th style="background: #FAA8F3;color: white;">Change</th>
+                <th style="background: #FAA8F3;color: white;">Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var feedback in @Model)
+            {
+                <tr>
+                    <td>@feedback.Id</td>
+                    <td>@feedback.Order.Client.Surname @feedback.Order.Client.Name @feedback.Order.Client.MiddleName</td>
+                    <td>@feedback.Order.Worker.Surname @feedback.Order.Worker.Name @feedback.Order.Worker.MiddleName</td>
+                    <td>@feedback.Mark</td>
+                    <td>@feedback.Text</td>
+                    <td>@feedback.DateTime</td>
+                    <td><a href="/Feedbacks/Update?id=@feedback.Id">Change</a></td>
+                    <td><a href="/Feedbacks/Delete?id=@feedback.Id">Remove</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

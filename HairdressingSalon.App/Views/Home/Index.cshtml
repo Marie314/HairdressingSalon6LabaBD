@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4" style="margin-top: 50px;">Welcome!</h1>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <br /><br />
+        <a style="color: #A4058A; font-size: 130%;" href="/Home/HomePage">Go to the Home page</a>
+    }
+    else
+    {
+        <h3 style="margin-top: 50px; font-weight: normal;">You should to Log In to use this app</h3>
+    }
+</div>

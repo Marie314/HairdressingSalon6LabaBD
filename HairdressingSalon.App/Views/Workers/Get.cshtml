@@ -1,0 +1,67 @@
+﻿@model List<Worker>
+
+@{
+    ViewData["Title"] = "Workes";
+}
+
+<div id="main">
+
+<h2>Workers</h2>
+
+<div>
+    <a class="menu-item-btn" href="/Clients/Get">Clients</a>
+    <a class="menu-item-btn" href="/Workers/Get">Workers</a>
+    <a class="menu-item-btn" href="/Feedbacks/Get">Feedbacks</a>
+    <a class="menu-item-btn" href="/Orders/Get">Orders</a>
+    <a class="menu-item-btn" href="/ServiceKinds/Get">Service Kinds</a>
+    <a class="menu-item-btn" href="/Services/Get">Services</a>
+</div>
+
+<form class="searching-form" asp-action="GetByCondition" method="get">
+        <label>Surname</label>
+        <input class="input-props" type="text" name="worker_surname" value="@ViewData["worker_surname"]" />
+
+        <br />
+        <label>Working date</label>
+        <input class="input-props" type="date" name="worker_workdate" value="@ViewData["worker_workdate"]" />
+        <div style="margin-top: 10px;">
+            <button style="margin-right: 10px;" class="action-btn" type="submit">Search</button>
+            <a class="clear-btn" href="/Workers/ClearForm" style="margin-left: 10px;">Clear Form</a>
+        </div>
+</form>
+
+ <form class="changing-form" asp-action="GetByCount" method="get">
+        <button class="show-btn" type="submit">Show</button>
+
+        <input class="input-props" type="number" name="entities_count" style="width: 100px;"/>
+
+        <label>entities</label>
+
+        <a class="show-btn" href="/Workers/GetAll">(Show all)</a>
+</form>
+
+<a class="create-btn" href="/Workers/Create">Create</a>
+
+<table class="table">
+    <thead>
+        <tr>
+                <th style="background: #FAA8F3;color: white;">Id</th>
+                <th style="background: #FAA8F3;color: white;">Full Name</th>
+                <th style="background: #FAA8F3;color: white;">Change</th>
+                <th style="background: #FAA8F3;color: white;">Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var worker in @Model)
+        {
+            <tr>
+                <td>@worker.Id</td>
+                <td>@worker.Surname @worker.Name @worker.MiddleName</td>
+                    <td><a href="/Workers/Update?id=@worker.Id">Change</a></td>
+                    <td><a href="/Workers/Delete?id=@worker.Id">Remove</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+</div>

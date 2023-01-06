@@ -1,0 +1,84 @@
+﻿@model ClientsModel
+
+@{
+    var serviceKinds = Model.ServiceKinds
+        .Select(i => new SelectListItem()
+                {
+                    Text = i.Name,
+                    Value = i.Name
+                })
+       .ToList();
+
+    string serviceKind = ViewData["client_service_kind"] is null ? "Haircut" : ViewData["client_service_kind"].ToString();
+}
+
+<div id="main">
+
+<h2>Clients</h2>
+
+<div>
+    <a class="menu-item-btn" href="/Clients/Get">Clients</a>
+    <a class="menu-item-btn" href="/Workers/Get">Workers</a>
+    <a class="menu-item-btn" href="/Feedbacks/Get">Feedbacks</a>
+    <a class="menu-item-btn" href="/Orders/Get">Orders</a>
+    <a class="menu-item-btn" href="/ServiceKinds/Get">Service Kinds</a>
+    <a class="menu-item-btn" href="/Services/Get">Services</a>
+</div>
+
+<form class="searching-form" asp-action="GetByCondition" method="get">
+        <label>Surname</label>
+        <input class="input-props" type="text" name="client_surname" value="@ViewData["client_surname"]" />
+
+        <br />
+        <label>Service kind</label>
+        <select class="select-props" name="client_service_kind" asp-items="@serviceKinds">
+            <option selected>@serviceKind</option>
+        </select>
+
+        <div style="margin-top: 10px;">
+            <button style="margin-right: 10px;" class="action-btn" type="submit">Search</button>
+            <a class="clear-btn" href="/Clients/ClearForm" style="margin-left: 10px;">Clear Form</a>
+        </div>
+    </form>
+
+    <form class="changing-form" asp-action="GetByCount" method="get">
+        <button class="show-btn" type="submit">Show</button>
+
+        <input class="input-props" type="number" name="entities_count" style="width: 100px;" />
+
+        <label>entities</label>
+
+        <a class="show-btn" href="/Clients/GetAll">(Show all)</a>
+    </form>
+
+<a class="create-btn" href="/Clients/Create">Create</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="background: #FAA8F3;color: white;">Id</th>
+            <th style="background: #FAA8F3;color: white;">Full Name</th>
+            <th style="background: #FAA8F3;color: white;">Address</th>
+            <th style="background: #FAA8F3;color: white;">Telephone</th>
+            <th style="background: #FAA8F3;color: white;">Discount</th>
+                <th style="background: #FAA8F3;color: white;">Change</th>
+                <th style="background: #FAA8F3;color: white;">Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in @Model.Clients)
+        {
+            <tr>
+                <td>@client.Id</td>
+                <td>@client.Surname @client.Name @client.MiddleName</td>
+                <td>@client.Address</td>
+                <td>@client.Telephone</td>
+                <td>@client.Discount%</td>
+                <td><a href="/Clients/Update?id=@client.Id">Change</a></td>
+                <td><a href="/Clients/Delete?id=@client.Id">Remove</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+</div>

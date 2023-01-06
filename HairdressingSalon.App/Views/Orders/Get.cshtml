@@ -1,0 +1,64 @@
+﻿@model List<Order>
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<div id="main">
+
+<h2>Orders</h2>
+
+<div>
+    <a class="menu-item-btn" href="/Clients/Get">Clients</a>
+    <a class="menu-item-btn" href="/Workers/Get">Workers</a>
+    <a class="menu-item-btn" href="/Feedbacks/Get">Feedbacks</a>
+    <a class="menu-item-btn" href="/Orders/Get">Orders</a>
+    <a class="menu-item-btn" href="/ServiceKinds/Get">Service Kinds</a>
+    <a class="menu-item-btn" href="/Services/Get">Services</a>
+</div>
+
+<form class="searching-form" asp-action="GetByCondition" method="get">
+        <div style="margin-top: 10px;">
+            <button style="width: 300px;" class="action-btn" type="submit">Search orders with negative client mark (>3)</button>
+        </div>
+</form>
+
+ <form class="changing-form" asp-action="GetByCount" method="get">
+            <button class="show-btn" type="submit">Show</button>
+
+            <input class="input-props" type="number" name="entities_count" style="width: 100px;"/>
+
+                <label>entities</label>
+
+        <a class="show-btn" href="/Orders/GetAll">(Show all)</a>
+</form>
+
+<a class="create-btn" href="/Orders/Create">Create</a>
+
+<table class="table">
+    <thead>
+        <tr>
+                <th style="background: #FAA8F3;color: white;">Id</th>
+                <th style="background: #FAA8F3;color: white;">Date & Time</th>
+                <th style="background: #FAA8F3;color: white;">Client</th>
+                <th style="background: #FAA8F3;color: white;">Worker</th>
+                <th style="background: #FAA8F3;color: white;">Change</th>
+                <th style="background: #FAA8F3;color: white;">Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in @Model)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.DateTime</td>
+                <td>@order.Client.Surname @order.Client.Name @order.Client.MiddleName</td>
+                <td>@order.Worker.Surname @order.Worker.Name @order.Worker.MiddleName</td>
+                    <td><a href="/Orders/Update?id=@order.Id">Change</a></td>
+                    <td><a href="/Orders/Delete?id=@order.Id">Remove</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+</div>

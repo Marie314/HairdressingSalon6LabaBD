@@ -1,0 +1,63 @@
+﻿@model List<Service>
+
+@{
+    ViewData["Title"] = "Services";
+}
+
+<div id="main">
+
+    <h2>Get services in any time range and which had positive marks</h2>
+
+    <div>
+        <a class="menu-item-btn" href="/Clients/Get">Clients</a>
+        <a class="menu-item-btn" href="/Workers/Get">Workers</a>
+        <a class="menu-item-btn" href="/Feedbacks/Get">Feedbacks</a>
+        <a class="menu-item-btn" href="/Orders/Get">Orders</a>
+        <a class="menu-item-btn" href="/ServiceKinds/Get">Service Kinds</a>
+        <a class="menu-item-btn" href="/Services/Get">Services</a>
+    </div>
+
+    <form class="searching-form" asp-action="GetInDateRangeByMarkAction" method="get">
+        <label>Start date</label>
+        <input class="input-props" type="date" name="startDate" />
+
+        <br />
+        <label>End date</label>
+        <input class="input-props" type="date" name="endDate" />
+
+        <div style="margin-top: 10px;">
+            <button class="action-btn" type="submit">Submit</button>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="background: #FAA8F3;color: white;">Id</th>
+                <th style="background: #FAA8F3;color: white;">Name</th>
+                <th style="background: #FAA8F3;color: white;">Code</th>
+                <th style="background: #FAA8F3;color: white;">Price</th>
+                <th style="background: #FAA8F3;color: white;">Date & Time</th>
+                <th style="background: #FAA8F3;color: white;">Client</th>
+                <th style="background: #FAA8F3;color: white;">Change</th>
+                <th style="background: #FAA8F3;color: white;">Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var service in @Model)
+            {
+                <tr>
+                    <td>@service.Id</td>
+                    <td>@service.ServiceKind.Name</td>
+                    <td>@service.Code</td>
+                    <td>@service.Price$</td>
+                    <td>@service.Order.DateTime</td>
+                    <td>@service.Order.Client.Surname @service.Order.Client.Name @service.Order.Client.MiddleName</td>
+                    <td><a href="/Services/Update?id=@service.Id">Change</a></td>
+                    <td><a href="/Services/Delete?id=@service.Id">Remove</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

@@ -1,0 +1,17 @@
+﻿<div id="main">
+    <h2>Feedbacks (delete)</h2>
+
+    <div>
+    <a class="menu-item-btn" href="/Clients/Get">Clients</a>
+    <a class="menu-item-btn" href="/Workers/Get">Workers</a>
+    <a class="menu-item-btn" href="/Feedbacks/Get">Feedbacks</a>
+    <a class="menu-item-btn" href="/Orders/Get">Orders</a>
+    <a class="menu-item-btn" href="/ServiceKinds/Get">Service Kinds</a>
+    <a class="menu-item-btn" href="/Services/Get">Services</a>
+    </div>
+
+    <form class="removing-form" asp-action="DeleteConfirm" method="post">
+        <h3>Are you sure that you want to remove this feedback?</h3>
+        <button class="action-btn" type="submit">Confirm</button>
+    </form>  
+</div>

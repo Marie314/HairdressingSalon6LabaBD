@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Services";
+}
+
+<div id="main">
+
+    <h2>Get count of services in any time range</h2>
+
+<div>
+    <a class="menu-item-btn" href="/Clients/Get">Clients</a>
+    <a class="menu-item-btn" href="/Workers/Get">Workers</a>
+    <a class="menu-item-btn" href="/Feedbacks/Get">Feedbacks</a>
+    <a class="menu-item-btn" href="/Orders/Get">Orders</a>
+    <a class="menu-item-btn" href="/ServiceKinds/Get">Service Kinds</a>
+    <a class="menu-item-btn" href="/Services/Get">Services</a>
+</div>
+
+    <form class="searching-form" asp-action="GetCountInDateRangeAction" method="get">
+        <label>Start date</label>
+        <input class="input-props" type="date" name="startDate" />
+
+        <br />
+        <label>End date</label>
+        <input class="input-props" type="date" name="endDate" />
+
+        <div style="margin-top: 10px;">
+            <button class="action-btn" type="submit">Count</button>
+        </div>
+</form>
+
+<h2>Count: @ViewData["count_by_date"]</h2>
+
+</div>

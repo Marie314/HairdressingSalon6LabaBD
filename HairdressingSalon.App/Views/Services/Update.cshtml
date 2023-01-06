@@ -1,0 +1,65 @@
+﻿@model ServiceUpdatedModel
+
+@{
+    var orders = Model.Orders
+        .Select(i => new SelectListItem()
+                {
+                    Text = $"{i.Id}, {i.DateTime}, Client: {i.Client.Name} {i.Client.Surname}, Worker: {i.Worker.Name} {i.Worker.Surname}",
+                    Value = $"{i.Id}, {i.DateTime}, Client: {i.Client.Name} {i.Client.Surname}, Worker: {i.Worker.Name} {i.Worker.Surname}"
+                });
+
+    var serviceKind = Model.ServiceKinds
+        .Select(i => new SelectListItem()
+                {
+                    Text = $"{i.Id}, {i.Name}",
+                    Value = $"{i.Id}, {i.Name}"
+                });
+}
+
+<div id="main">
+    <h2>Services (create)</h2>
+
+    <div>
+        <a class="menu-item-btn" href="/Clients/Get">Clients</a>
+        <a class="menu-item-btn" href="/Workers/Get">Workers</a>
+        <a class="menu-item-btn" href="/Feedbacks/Get">Feedbacks</a>
+        <a class="menu-item-btn" href="/Orders/Get">Orders</a>
+        <a class="menu-item-btn" href="/ServiceKinds/Get">Service Kinds</a>
+        <a class="menu-item-btn" href="/Services/Get">Services</a>
+    </div>
+
+    <form class="changing-form" method="post" asp-action="Update">
+
+        <div class="field-container">
+            <label asp-for="Code"></label>
+            <div>
+                <input class="input-props" asp-for="Code" type="number" />
+                <span class="error-mes-span" style="color: red; font-size: 90%;" asp-validation-for="Code"></span>
+            </div>
+        </div>
+
+        <div class="field-container">
+            <label asp-for="Price">Price (old: @Model.Price)</label>
+            <div>
+                <input class="input-props" asp-for="Price" type="number" />
+                <span class="error-mes-span" style="color: red; font-size: 90%;" asp-validation-for="Price"></span>
+            </div>
+        </div>
+
+        <div class="field-container">
+            <label asp-for="ServiceKind"></label>
+            <div>
+                <select class="select-props" asp-for="ServiceKind" asp-items="@serviceKind"></select>
+            </div>
+        </div>
+
+        <div class="field-container">
+            <label asp-for="Order"></label>
+            <div>
+                <select class="select-props" asp-for="Order" asp-items="@orders"></select>
+            </div>
+        </div>
+
+        <button class="action-btn" type="submit">Submit</button>
+    </form>
+</div>

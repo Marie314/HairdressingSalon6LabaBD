@@ -1,0 +1,60 @@
+﻿@model OrderUpdatedModel
+
+@{
+    var clients = Model.Clients
+        .Select(i => new SelectListItem()
+                {
+                    Text = $"{i.Id}, {i.Surname} {i.Name} {i.MiddleName}",
+                    Value = $"{i.Id}, {i.Surname} {i.Name} {i.MiddleName}"
+                });
+
+    var workers = Model.Workers
+        .Select(i => new SelectListItem()
+                {
+                    Text = $"{i.Id}, {i.Surname} {i.Name} {i.MiddleName}",
+                    Value = $"{i.Id}, {i.Surname} {i.Name} {i.MiddleName}"
+                });
+}
+
+<div id="main">
+    <h2>Orders (update)</h2>
+
+    <div>
+        <a class="menu-item-btn" href="/Clients/Get">Clients</a>
+        <a class="menu-item-btn" href="/Workers/Get">Workers</a>
+        <a class="menu-item-btn" href="/Feedbacks/Get">Feedbacks</a>
+        <a class="menu-item-btn" href="/Orders/Get">Orders</a>
+        <a class="menu-item-btn" href="/ServiceKinds/Get">Service Kinds</a>
+        <a class="menu-item-btn" href="/Services/Get">Services</a>
+    </div>
+
+    <form class="changing-form" method="post" asp-action="Update">
+        <div class="field-container">
+            <label asp-for="DateTime"></label>
+            <div>
+                <input class="input-props" asp-for="DateTime" type="datetime-local"/>
+                <span class="error-mes-span" style="color: red; font-size: 90%;" asp-validation-for="DateTime"></span>
+            </div>
+        </div>
+
+        <div class="field-container">
+            <label asp-for="Client"></label>
+            <div>
+                <select class="select-props" asp-for="Client" asp-items="@clients">
+                    <option selected>@Model.OldOrder.ClientId, @Model.OldOrder.Client.Surname @Model.OldOrder.Client.Name @Model.OldOrder.Client.MiddleName</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="field-container">
+            <label asp-for="Worker"></label>
+            <div>
+                <select class="select-props" asp-for="Worker" asp-items="@workers">
+                    <option selected>@Model.OldOrder.WorkerId, @Model.OldOrder.Worker.Surname @Model.OldOrder.Worker.Name @Model.OldOrder.Worker.MiddleName</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="action-btn" type="submit">Submit</button>
+    </form>
+</div>
